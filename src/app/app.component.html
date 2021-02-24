@@ -1,0 +1,125 @@
+<p-table
+  #dt
+  [value]="questions"
+  dataKey="questionId"
+  styleClass="p-datatable-questions"
+  [rowHover]="true"
+  [rows]="100"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[100, 500, 5000]"
+  [loading]="loading"
+  [paginator]="true"
+  currentPageReportTemplate="({first} - {last}) / {totalRecords} "
+  [filterDelay]="0"
+  [globalFilterFields]="['title', 'titleSlug', 'topicTags']"
+>
+  <ng-template pTemplate="caption" let-columns>
+    <div class="table-header">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="questionFrontendId">
+        Id <p-sortIcon field="questionFrontendId"></p-sortIcon>
+      </th>
+      <th pSortableColumn="title">
+        Name <p-sortIcon field="title"></p-sortIcon>
+      </th>
+      <th pSortableColumn="difficulty">
+        Difficulty <p-sortIcon field="difficulty"></p-sortIcon>
+      </th>
+      <th pSortableColumn="topicTags">
+        Topics <p-sortIcon field="topicTags"></p-sortIcon>
+      </th>
+      <th pSortableColumn="likes">
+        Likes <p-sortIcon field="likes"></p-sortIcon>
+      </th>
+      <th pSortableColumn="dislikes">
+        Dislikes <p-sortIcon field="dislikes"></p-sortIcon>
+      </th>
+      <th pSortableColumn="total_acs">
+        Total AC <p-sortIcon field="total_acs"></p-sortIcon>
+      </th>
+      <th pSortableColumn="total_submitted">
+        Total Submit <p-sortIcon field="total_submitted"></p-sortIcon>
+      </th>
+      <th pSortableColumn="similarQuestions">
+        Similar <p-sortIcon field="similarQuestions"></p-sortIcon>
+      </th>
+      <th pSortableColumn="paid_only">
+        Paid Only <p-sortIcon field="paid_only"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-question>
+    <tr>
+      <td>
+        <span class="p-column-title">Id</span>
+        {{ question.questionFrontendId }}
+      </td>
+      <td>
+        <span class="p-column-title">Name</span>
+        <a href="https://www.Leetcode.com/problems/{{ question.titleSlug }}">{{
+          question.title
+        }}</a>
+      </td>
+      <td>
+        <span class="p-column-title">Difficulty</span>
+        {{ question.difficulty }}
+      </td>
+      <td>
+        <span class="p-column-title">Topics</span>
+        <span
+          class="badge rounded-pill bg-light text-dark"
+          *ngFor="let topic of question.topicTags"
+        >
+          {{ topic }}
+        </span>
+      </td>
+      <td>
+        <span class="p-column-title">Likes</span>
+        {{ question.likes }}
+      </td>
+      <td>
+        <span class="p-column-title">Dislikes</span>
+        {{ question.dislikes }}
+      </td>
+      <td>
+        <span class="p-column-title">Total AC</span>
+        {{ question.total_acs }}
+      </td>
+      <td>
+        <span class="p-column-title">Total submit</span>
+        {{ question.total_submitted }}
+      </td>
+      <td>
+        <span class="p-column-title">Similar</span>
+        <ol>
+          <li *ngFor="let question of question.similarQuestions">
+            <a href="https://www.Leetcode.com/problems/{{ question.titleSlug }}"
+              >{{ question.titleSlug }}{{ question.title }}
+            </a>
+          </li>
+        </ol>
+      </td>
+      <td>
+        <span class="p-column-title">paid_only</span>
+        {{ question.paid_only }}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No questions found.</td>
+    </tr>
+  </ng-template>
+</p-table>

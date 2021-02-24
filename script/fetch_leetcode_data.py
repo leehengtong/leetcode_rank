@@ -120,6 +120,17 @@ query questionData($titleSlug: String!) {
     return info
 
 
+def Difficulty(value):
+    if value == 1:
+        return 'Easy'
+    elif value == 2:
+        return 'Medium'
+    elif value == 3:
+        return 'Hard'
+    else:
+        return 'Unknown'
+
+
 if __name__ == "__main__":
     questions = get_question_list()
     data = {}
@@ -128,12 +139,24 @@ if __name__ == "__main__":
     for i in tqdm(range(len(question_ids))):
         question_id = question_ids[i]
         question = questions[question_id]
+        if question['question__hide']:
+            continue
+
         info = get_question_info(question['question__title_slug'])
+        topics = [topic['name'] for topic in info['topicTags']]
+        difficulty = Difficulty(question['difficulty'])
+        similars = []
+        for item in json.loads(info['similarQuestions']):
+            similars.append({
+                'title': item['title'],
+                'titleSlug': item['titleSlug']
+            })
+
         data[question_id] = {
             "questionId":
-            info["questionId"],
+            int(info["questionId"]),
             "questionFrontendId":
-            info["questionFrontendId"],
+            int(info["questionFrontendId"]),
             "boundTopicId":
             info["boundTopicId"],
             "title":
@@ -143,7 +166,7 @@ if __name__ == "__main__":
             "isPaidOnly":
             info["isPaidOnly"],
             "difficulty":
-            info["difficulty"],
+            difficulty,
             "likes":
             info["likes"],
             "dislikes":
@@ -151,11 +174,9 @@ if __name__ == "__main__":
             "isLiked":
             info["isLiked"],
             "similarQuestions":
-            info["similarQuestions"],
-            "contributors":
-            info["contributors"],
+            similars,
             "topicTags":
-            info["topicTags"],
+            topics,
             "link":
             "https://leetcode.com/problems/" +
             question['question__title_slug'],
@@ -167,11 +188,9 @@ if __name__ == "__main__":
             question["total_submitted"],
             "is_new_question":
             question["is_new_question"],
-            "difficulty":
-            question['difficulty'],
             "paid_only":
             question["paid_only"]
         }
 
     with open("data.js", 'w') as f:
-        json.dump(data, f)
+        json.dump(list(data.values()), f)
