@@ -15,7 +15,15 @@
 >
   <ng-template pTemplate="caption" let-columns>
     <div class="table-header">
-      <span class="p-input-icon-left">
+      <a
+        href="https://www.revolvermaps.com/livestats/5ijada2obhx/"
+        style="text-align: right"
+        ><img
+          src="//rf.revolvermaps.com/w/3/s/a/0/40/0/9d8b63/007eff/54ff00/5ijada2obhx.png"
+          alt="Stats"
+          style="border: 0"
+      /></a>
+      <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
         <input
           pInputText
@@ -105,8 +113,10 @@
         <span class="p-column-title">Similar</span>
         <ol>
           <li *ngFor="let question of question.similarQuestions">
-            <a href="https://www.Leetcode.com/problems/{{ question.titleSlug }}"
-              > {{ question.title }}
+            <a
+              href="https://www.Leetcode.com/problems/{{ question.titleSlug }}"
+            >
+              {{ question.title }}
             </a>
           </li>
         </ol>
