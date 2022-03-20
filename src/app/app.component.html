@@ -1,72 +1,110 @@
-<p-table
-  #dt
-  [value]="questions"
-  dataKey="questionId"
-  styleClass="p-datatable-questions"
-  [rowHover]="true"
-  [rows]="100"
-  [showCurrentPageReport]="true"
-  [rowsPerPageOptions]="[100, 500, 5000]"
-  [loading]="loading"
-  [paginator]="true"
-  currentPageReportTemplate="({first} - {last}) / {totalRecords} "
-  [filterDelay]="0"
-  [globalFilterFields]="['title', 'titleSlug', 'topicTags']"
->
+<p-table #dt [value]="questions" dataKey="questionId" styleClass="p-datatable-questions" [rowHover]="true" [rows]="100"
+  [showCurrentPageReport]="true" [rowsPerPageOptions]="[100, 500, 5000]" [loading]="loading" [paginator]="true"
+  currentPageReportTemplate="({first} - {last}) / {totalRecords} " [filterDelay]="0"
+  [globalFilterFields]="['title', 'titleSlug', 'topicTags']" [autoLayout]="true" [resizableColumns]="false">
   <ng-template pTemplate="caption" let-columns>
     <div class="table-header">
-      <a
-        href="https://www.revolvermaps.com/livestats/5ijada2obhx/"
-        style="text-align: right"
-        ><img
-          src="//rf.revolvermaps.com/w/3/s/a/0/40/0/9d8b63/007eff/54ff00/5ijada2obhx.png"
-          alt="Stats"
-          style="border: 0"
-      /></a>
+      <a href="https://www.revolvermaps.com/livestats/5ijada2obhx/" style="text-align: right"><img
+          src="//rf.revolvermaps.com/w/3/s/a/0/40/0/9d8b63/007eff/54ff00/5ijada2obhx.png" alt="Stats"
+          style="border: 0" /></a>
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="dt.filterGlobal($event.target.value, 'contains')"
-          placeholder="Global Search"
-        />
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search" />
       </span>
     </div>
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="questionFrontendId">
+      <th pSortableColumn="questionFrontendId" >
         Id <p-sortIcon field="questionFrontendId"></p-sortIcon>
       </th>
-      <th pSortableColumn="title">
+      <th pSortableColumn="title" >
         Name <p-sortIcon field="title"></p-sortIcon>
       </th>
-      <th pSortableColumn="difficulty">
+      <th pSortableColumn="difficulty" >
         Difficulty <p-sortIcon field="difficulty"></p-sortIcon>
       </th>
-      <th pSortableColumn="topicTags">
+      <th pSortableColumn="topicTags" >
         Topics <p-sortIcon field="topicTags"></p-sortIcon>
       </th>
-      <th pSortableColumn="likes">
+      <th pSortableColumn="likes" >
         Likes <p-sortIcon field="likes"></p-sortIcon>
       </th>
-      <th pSortableColumn="dislikes">
+      <th pSortableColumn="dislikes" >
         Dislikes <p-sortIcon field="dislikes"></p-sortIcon>
       </th>
-      <th pSortableColumn="total_acs">
-        Total AC <p-sortIcon field="total_acs"></p-sortIcon>
+      <th pSortableColumn="totalAc" >
+        AC <p-sortIcon field="totalAc"></p-sortIcon>
       </th>
-      <th pSortableColumn="total_submitted">
-        Total Submit <p-sortIcon field="total_submitted"></p-sortIcon>
+      <th pSortableColumn="totalSubmit" >
+        Submit <p-sortIcon field="totalSubmit"></p-sortIcon>
       </th>
-      <th pSortableColumn="similarQuestions">
-        Similar <p-sortIcon field="similarQuestions"></p-sortIcon>
+      <th pSortableColumn="similarQuestions" >
+        Similar
       </th>
-      <th pSortableColumn="paid_only">
-        Paid Only <p-sortIcon field="paid_only"></p-sortIcon>
+      <th pSortableColumn="paidOnly" >
+        Paid
       </th>
     </tr>
+
+    <tr>
+      <th>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'questionFrontendId', 'equals')" placeholder=""
+          class="p-column-filter>
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'title', 'contains')" placeholder=""
+          class="p-column-filter">
+      </th>
+      <th>
+        <p-multiSelect [options]="difficultyLevels" placeholder="All" (onChange)="onDifficultyLevelsChange($event)"
+          class="p-column-filter" optionLabel="level">
+          <ng-template let-option pTemplate="item">
+            <div class="p-multiselect-representative-option">
+              <span class="p-ml-1">{{option}}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </th>
+      <th>
+        <p-multiSelect [options]="topicTags" placeholder="All" (onChange)="onTopicTagsChange($event)"
+          class="p-column-filter" optionLabel="topicTag">
+          <ng-template let-option pTemplate="item">
+            <div class="p-multiselect-representative-option">
+              <span class="p-ml-1">{{option}}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </th>
+      <th>
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'likes', 'gt')" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'dislikes', 'lt')" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'totalAc','gt')" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'totalSubmit','gt')" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'similarQuestions', 'array-contain')"
+          placeholder="" class="p-column-filter">
+      </th>
+      <th>
+        <p-multiSelect [options]="[true, false]" placeholder="All" (onChange)="onPaidOnlyChange($event)"
+          class="p-column-filter" optionLabel="paidOnly">
+          <ng-template let-option pTemplate="item">
+            <div class="p-multiselect-representative-option">
+              <span class="p-ml-1">{{option}}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+      </th>
+    </tr>
+
   </ng-template>
   <ng-template pTemplate="body" let-question>
     <tr>
@@ -78,7 +116,7 @@
         <span class="p-column-title">Name</span>
         <a href="https://www.Leetcode.com/problems/{{ question.titleSlug }}">{{
           question.title
-        }}</a>
+          }}</a>
       </td>
       <td>
         <span class="p-column-title">Difficulty</span>
@@ -86,10 +124,7 @@
       </td>
       <td>
         <span class="p-column-title">Topics</span>
-        <span
-          class="badge rounded-pill bg-light text-dark"
-          *ngFor="let topic of question.topicTags"
-        >
+        <span class="badge rounded-pill bg-light text-dark" *ngFor="let topic of question.topicTags">
           {{ topic }}
         </span>
       </td>
@@ -103,27 +138,25 @@
       </td>
       <td>
         <span class="p-column-title">Total AC</span>
-        {{ question.total_acs }}
+        {{ question.totalAc }}
       </td>
       <td>
         <span class="p-column-title">Total submit</span>
-        {{ question.total_submitted }}
+        {{ question.totalSubmit }}
       </td>
       <td>
         <span class="p-column-title">Similar</span>
         <ol>
           <li *ngFor="let question of question.similarQuestions">
-            <a
-              href="https://www.Leetcode.com/problems/{{ question.titleSlug }}"
-            >
+            <a href="https://www.Leetcode.com/problems/{{ question.titleSlug }}">
               {{ question.title }}
             </a>
           </li>
         </ol>
       </td>
       <td>
-        <span class="p-column-title">paid_only</span>
-        {{ question.paid_only }}
+        <span class="p-column-title">paidOnly</span>
+        {{ question.paidOnly }}
       </td>
     </tr>
   </ng-template>

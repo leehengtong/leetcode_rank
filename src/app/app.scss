@@ -19,6 +19,13 @@
     justify-content: space-between;
   }
 
+  tr > th {
+    .p-column-filter {
+      width: 90%;
+      height: 2.7rem
+    }
+  }
+
   .p-calendar .p-datepicker {
     min-width: 25rem;
 
@@ -30,11 +37,10 @@
   .p-datatable.p-datatable-questions {
     .p-datatable-header {
       padding: 1rem;
-      text-align: left;
       font-size: 1.5rem;
       background-color: #009879;
       color: #ffffff;
-      text-align: left;
+      text-align: center;
     }
 
     .p-paginator {
@@ -42,14 +48,14 @@
     }
 
     .p-datatable-thead > tr > th {
-      text-align: left;
       color: #ffffff;
-      text-align: left;
+      text-align: center;
       background-color: #46e4c4;
     }
 
     .p-datatable-tbody > tr > td {
       cursor: auto;
+      text-align: center;
     }
 
     .p-dropdown-label:not(.p-placeholder) {

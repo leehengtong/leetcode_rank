@@ -180,15 +180,15 @@ if __name__ == "__main__":
             "link":
             "https://leetcode.com/problems/" +
             question['question__title_slug'],
-            "question__hide":
+            "questionHide":
             question["question__hide"],
-            "total_acs":
+            "totalAcs":
             question["total_acs"],
-            "total_submitted":
+            "totalSubmitted":
             question["total_submitted"],
-            "is_new_question":
+            "isNewQuestion":
             question["is_new_question"],
-            "paid_only":
+            "paidOnly":
             question["paid_only"]
         }
 

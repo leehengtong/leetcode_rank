@@ -18,9 +18,9 @@ export interface Question {
   contributors?: string[];
   topicTags?: string[];
   link?: string;
-  question__hide?: boolean;
-  total_acs?: number;
-  total_submitted?: number;
-  is_new_question?: boolean;
-  paid_only?: boolean;
+  questionHide?: boolean;
+  totalAc?: number;
+  totalSubmit?: number;
+  isNewQuestion?: boolean;
+  paidOnly?: boolean;
 }
