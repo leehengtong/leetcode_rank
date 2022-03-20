@@ -16,42 +16,42 @@
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="questionFrontendId" >
+      <th pSortableColumn="questionFrontendId">
         Id <p-sortIcon field="questionFrontendId"></p-sortIcon>
       </th>
-      <th pSortableColumn="title" >
+      <th pSortableColumn="title">
         Name <p-sortIcon field="title"></p-sortIcon>
       </th>
-      <th pSortableColumn="difficulty" >
+      <th pSortableColumn="difficulty">
         Difficulty <p-sortIcon field="difficulty"></p-sortIcon>
       </th>
-      <th pSortableColumn="topicTags" >
+      <th pSortableColumn="topicTags">
         Topics <p-sortIcon field="topicTags"></p-sortIcon>
       </th>
-      <th pSortableColumn="likes" >
+      <th pSortableColumn="likes">
         Likes <p-sortIcon field="likes"></p-sortIcon>
       </th>
-      <th pSortableColumn="dislikes" >
+      <th pSortableColumn="dislikes">
         Dislikes <p-sortIcon field="dislikes"></p-sortIcon>
       </th>
-      <th pSortableColumn="totalAc" >
+      <th pSortableColumn="totalAc">
         AC <p-sortIcon field="totalAc"></p-sortIcon>
       </th>
-      <th pSortableColumn="totalSubmit" >
+      <th pSortableColumn="totalSubmit">
         Submit <p-sortIcon field="totalSubmit"></p-sortIcon>
       </th>
-      <th pSortableColumn="similarQuestions" >
+      <th pSortableColumn="similarQuestions">
         Similar
       </th>
-      <th pSortableColumn="paidOnly" >
+      <th pSortableColumn="paidOnly">
         Paid
       </th>
     </tr>
 
     <tr>
       <th>
-        <input pInputText type="text" (input)="dt.filter($event.target.value, 'questionFrontendId', 'equals')" placeholder=""
-          class="p-column-filter>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'questionFrontendId', 'equals')"
+          placeholder="" class="p-column-filter">
       </th>
       <th>
         <input pInputText type="text" (input)="dt.filter($event.target.value, 'title', 'contains')" placeholder=""
@@ -78,16 +78,20 @@
         </p-multiSelect>
       </th>
       <th>
-        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'likes', 'gt')" class="p-column-filter">
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'likes', 'gt')"
+          class="p-column-filter">
       </th>
       <th>
-        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'dislikes', 'lt')" class="p-column-filter">
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'dislikes', 'lt')"
+          class="p-column-filter">
       </th>
       <th>
-        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'totalAc','gt')" class="p-column-filter">
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'totalAc','gt')"
+          class="p-column-filter">
       </th>
       <th>
-        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'totalSubmit','gt')" class="p-column-filter">
+        <input pInputText type="text" placeholder="" (input)="dt.filter($event.target.value, 'totalSubmit','gt')"
+          class="p-column-filter">
       </th>
       <th>
         <input pInputText type="text" (input)="dt.filter($event.target.value, 'similarQuestions', 'array-contain')"
